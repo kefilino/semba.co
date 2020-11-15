@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/main.css')}}">
     <title>Semba.co</title>
 </head>
 
@@ -21,13 +21,13 @@
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
                 <ul class="navbar-nav ">
                     <li class="nav-item">
-                        <a class="nav-link" data-value="about" href="#">About</a>
+                        <a class="nav-link" data-value="about" href="about">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " data-value="blog" href="#">Login</a>
+                        <a class="nav-link " data-value="login" href="login">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " data-value="contact" href="#">Sign up</a>
+                        <a class="nav-link " data-value="register" href="register">Sign up</a>
                     </li>
                 </ul>
             </div>
