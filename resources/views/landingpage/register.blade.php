@@ -46,49 +46,58 @@
                 <form action="/register" method="post" class="form">
                     @csrf
                     <div class="container">
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="list-group">
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
                         <div class="row mx-md-n5">
                             <div class="col px-md-5">
                                 <label for="regist-nama" style="padding-top:13px">
                                     &nbsp;Nama Lengkap :
                                 </label>
-                                <input id="regist-nama" class="form-content form-control input-lg" type="nama" name="nama" autocomplete="on" required />
+                                <input id="regist-nama" class="form-content form-control input-lg" type="name" name="nama" autocomplete="on" required value="{{ old('nama') }}" />
                                 <div class="form-border"></div>
                                 <label for="user-email" style="padding-top:13px">
                                     &nbsp;E-mail :
                                 </label>
-                                <input id="user-email" class="form-content form-control input-lg" type="email" name="email" autocomplete="on" required />
+                                <input id="user-email" class="form-content form-control input-lg" type="email" name="email" autocomplete="on" required value="{{ old('email') }}" />
                                 <div class="form-border"></div>
                                 <label for="user-password" style="padding-top:22px">
                                     &nbsp;Password :
                                 </label>
                                 <input id="user-password" class="form-content form-control input-lg" type="password" name="password" required />
                                 <div class="form-border"></div>
-                                <label for="user-password_confirmation" style="padding-top:22px">
+                                <label for="password_confirmation" style="padding-top:22px">
                                     &nbsp;Konfirmasi Password :
                                 </label>
-                                <input id="user-password_confirmation" class="form-content form-control input-lg" type="password_confirmation" name="password_confirmation" required />
+                                <input id="user-password" class="form-content form-control input-lg" type="password" name="password_confirmation" required />
                                 <div class="form-border"></div>
                             </div>
                             <div class="col px-md-5">
                                 <label for="user-nik" style="padding-top:13px">
                                     &nbsp;Nomor Induk Kependudukan :
                                 </label>
-                                <input id="user-nik" class="form-content form-control input-lg" type="nik" name="nik" autocomplete="on" required />
+                                <input id="user-nik" class="form-content form-control input-lg" type="text" name="nik" autocomplete="on" required value="{{ old('nik') }}" />
                                 <div class="form-border"></div>
                                 <label for="user-kk" style="padding-top:13px">
                                     &nbsp;Nomor Kartu Keluarga :
                                 </label>
-                                <input id="user-kk" class="form-content form-control input-lg" type="kk" name="kk" autocomplete="on" required />
+                                <input id="user-kk" class="form-content form-control input-lg" type="text" name="kk" autocomplete="on" required value="{{ old('kk') }}" />
                                 <div class="form-border"></div>
-                                <label for="user-address" style="padding-top:22px">
+                                <label for="user-alamat" style="padding-top:22px">
                                     &nbsp;Alamat :
                                 </label>
-                                <input id="user-address" class="form-content form-control input-lg" type="address" name="address" required />
+                                <input id="user-alamat" class="form-content form-control input-lg" type="text" name="alamat" required value="{{ old('alamat') }}" />
                                 <div class="form-border"></div>
-                                <label for="user-zipcode" style="padding-top:22px">
+                                <label for="user-kode_pos" style="padding-top:22px">
                                     &nbsp;Kode Pos :
                                 </label>
-                                <input id="user-zipcode" class="form-content form-control input-lg" type="zipcode" name="zipcode" required />
+                                <input id="user-kode_pos" class="form-content form-control input-lg" type="text" name="kode_pos" required value="{{ old('kode_pos') }}" />
                                 <div class="form-border"></div>
                             </div>
                         </div>
