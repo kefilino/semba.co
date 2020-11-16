@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ControllerUser;
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +14,7 @@ use App\Http\Controllers\ControllerUser;
 |
 */
 
-Route::get('/', [ControllerUser::class, 'index']);
-Route::get('/about', [ControllerUser::class, 'about']);
-Route::get('/login', [ControllerUser::class, 'login']);
-Route::get('/register', [ControllerUser::class, 'register']);
+Route::get('/', [UsersController::class, 'index']);
+Route::get('/about', [UsersController::class, 'about']);
+Route::get('/login', [UsersController::class, 'login']);
+Route::get('/register', [UsersController::class, 'register']);

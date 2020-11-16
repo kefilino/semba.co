@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redis;
 
 class UsersController extends Controller
 {
@@ -21,14 +22,17 @@ class UsersController extends Controller
         return view('landingpage.about');
     }
 
-    public function login() {
+    public function login(Request $request) {
+        if ($request->has('email')) {
+            $this->dashboard();
+        }
         return view('landingpage.login');
     }
 
     public function register() {
         return view('landingpage.register');
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
