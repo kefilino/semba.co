@@ -12,7 +12,7 @@ class UsersController extends Controller
     public function index()
     {
         if (!Auth::check()) {
-            return view('landingpage.landing');
+            return view('landingpage.home');
         } else {
             return view('dashboard');
         }
@@ -29,7 +29,10 @@ class UsersController extends Controller
         return view('landingpage.login');
     }
 
-    public function register() {
+    public function register(Request $request) {
+        if ($request->has('email')) {
+            dd($request);
+        }
         return view('landingpage.register');
     }
 

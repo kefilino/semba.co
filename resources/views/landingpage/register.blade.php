@@ -40,34 +40,67 @@
                     <img src="{{asset('images/user-logo.png')}}"><br>
                 </div>
                 <div id="card-title">
-
                     <h2>Register</h2>
                     <div class="underline-title"></div>
                 </div>
-                <form method="post" class="form">
-                    <label for="regist-nama" style="padding-top:13px">
-                        &nbsp;Nama Lengkap :
-                    </label>
-                    <input id="regist-nama" class="form-content" type="nama" name="nama" autocomplete="on" required />
-                    <div class="form border"></div>
-                    <label for="user-email" style="padding-top:13px">
-                        &nbsp;E-mail :
-                    </label>
-                    <input id="user-email" class="form-content" type="email" name="email" autocomplete="on" required />
-                    <div class="form-border"></div>
-                    <label for="user-password" style="padding-top:22px">&nbsp;Password :
-                    </label>
-                    <input id="user-password" class="form-content" type="password" name="password" required />
-                    <div class="form-border"></div>
-                    <a href="#">
-                        <legend id="forgot-pass">Forgot password?</legend>
-                    </a>
-                    <input id="submit-btn" type="submit" name="submit" value="LOGIN" />
-                    <a href="#" id="signup">Don't have an account ? Sign Up</a>
+                <form action="/register" method="post" class="form">
+                    @csrf
+                    <div class="container">
+                        <div class="row mx-md-n5">
+                            <div class="col px-md-5">
+                                <label for="regist-nama" style="padding-top:13px">
+                                    &nbsp;Nama Lengkap :
+                                </label>
+                                <input id="regist-nama" class="form-content form-control input-lg" type="nama" name="nama" autocomplete="on" required />
+                                <div class="form-border"></div>
+                                <label for="user-email" style="padding-top:13px">
+                                    &nbsp;E-mail :
+                                </label>
+                                <input id="user-email" class="form-content form-control input-lg" type="email" name="email" autocomplete="on" required />
+                                <div class="form-border"></div>
+                                <label for="user-password" style="padding-top:22px">
+                                    &nbsp;Password :
+                                </label>
+                                <input id="user-password" class="form-content form-control input-lg" type="password" name="password" required />
+                                <div class="form-border"></div>
+                                <label for="user-password_confirmation" style="padding-top:22px">
+                                    &nbsp;Konfirmasi Password :
+                                </label>
+                                <input id="user-password_confirmation" class="form-content form-control input-lg" type="password_confirmation" name="password_confirmation" required />
+                                <div class="form-border"></div>
+                            </div>
+                            <div class="col px-md-5">
+                                <label for="user-nik" style="padding-top:13px">
+                                    &nbsp;Nomor Induk Kependudukan :
+                                </label>
+                                <input id="user-nik" class="form-content form-control input-lg" type="nik" name="nik" autocomplete="on" required />
+                                <div class="form-border"></div>
+                                <label for="user-kk" style="padding-top:13px">
+                                    &nbsp;Nomor Kartu Keluarga :
+                                </label>
+                                <input id="user-kk" class="form-content form-control input-lg" type="kk" name="kk" autocomplete="on" required />
+                                <div class="form-border"></div>
+                                <label for="user-address" style="padding-top:22px">
+                                    &nbsp;Alamat :
+                                </label>
+                                <input id="user-address" class="form-content form-control input-lg" type="address" name="address" required />
+                                <div class="form-border"></div>
+                                <label for="user-zipcode" style="padding-top:22px">
+                                    &nbsp;Kode Pos :
+                                </label>
+                                <input id="user-zipcode" class="form-content form-control input-lg" type="zipcode" name="zipcode" required />
+                                <div class="form-border"></div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-md-center">
+                            <input id="submit-btn" type="submit" name="submit" value="SIGN-UP" />
+                        </div>
+                        <div class="row justify-content-md-center">
+                            <a href="login" id="signup">Already have an account ? Sign In</a>
+                        </div>
+                    </div>
                 </form>
-
             </div>
-
         </div>
 </body>
 

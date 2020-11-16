@@ -73,7 +73,7 @@
         <header class="header">
 
             <nav class="navbar navbar-toggleable-md navbar-expand-lg fixed-top ">
-                <a class="navbar-brand " href="#">Semba.co</a>
+                <a class="navbar-brand " href="../">Semba.co</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">  
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -106,11 +106,11 @@
             
                 <div class="d-flex justify-content-around">
                     <div class="w3-hover-shadow w3-center border-about">
-                        <img src="asset/news-about.png" class=" w3-padding" alt="Alps" style="width: 7em; height: 5em;">
+                        <img src="{{ asset('images/news-about.png') }}" class=" w3-padding" alt="Alps" style="width: 7em; height: 5em;">
                         <p style="padding: 0.5em">Berita Semba.co</p>
                       </div>
                       <div class="w3-hover-shadow w3-center border-about">
-                        <img src="asset/request-about.png" class=" w3-padding" alt="Alps" style="width: 7em; height: 5em;">
+                        <img src="{{ asset('images/request-about.png') }}" class=" w3-padding" alt="Alps" style="width: 7em; height: 5em;">
                         <p style="padding: 0.5em">Pengajuan Bantuan</p>
                       </div>
                 </div>

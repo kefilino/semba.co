@@ -1,0 +1,64 @@
+body {
+    padding-top: 50px;
+}
+
+.navbar {
+    background-color: white;
+    color: blue;
+}
+
+.navbar-collapse {
+    justify-content: flex-end;
+}
+
+.jumbotron {
+    position: relative;
+    background: url(../images/groceries.png) no-repeat center center fixed;
+    background-size: cover;
+    height: 100%;
+}
+
+.jumbotron > .overlay {
+    position: absolute;
+    min-height: 100%;
+    min-width: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(111, 183, 241, 0.795) !important;
+    opacity: 0.5;
+    z-index: 1;
+}
+
+.jumbotron .container {
+    text-align: center;
+    position: relative;
+    color: white;
+    z-index: 2;
+    width: 50%;
+}
+.img-fluid {
+    height: 100px;
+}
+.container-login100 {
+    width: 100%;
+    min-height: 60vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+}
+
+.border-about {
+    border: 2px solid #ffffff;
+}
