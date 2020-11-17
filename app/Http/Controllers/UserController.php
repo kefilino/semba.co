@@ -3,36 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserSignupRequest;
-use App\Models\Users;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redis;
 
-class UsersController extends Controller
+class UserController extends Controller
 {
     public function index()
     {
-        if (!Auth::check()) {
-            return view('landingpage.home');
-        } else {
-            return view('dashboard');
+        if(Auth::check()) {
+            echo 'login berhasil';
         }
-    }
-
-    public function about() {
-        return view('landingpage.about');
-    }
-
-    public function login(Request $request) {
-        if ($request->has('email')) {
-            $this->dashboard();
-        }
-        return view('landingpage.login');
-    }
-
-    public function register(UserSignupRequest $request) {
-        Users::create($request->validated());
-        return view('landingpage.login');
     }
 
     /**
@@ -40,9 +23,18 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(UserSignupRequest $request)
     {
-        //
+        $request = $request->validated();
+        User::create([
+            'nama' => $request['nama'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+            'nik' => $request['nik'],
+            'kk' => $request['kk'],
+            'alamat' => $request['alamat'],
+            'kode_pos' => $request['kode_pos'],
+        ]);
     }
 
     /**
@@ -59,10 +51,10 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Users  $users
+     * @param  \App\Models\User  $users
      * @return \Illuminate\Http\Response
      */
-    public function show(Users $users)
+    public function show(User $users)
     {
         //
     }
@@ -70,10 +62,10 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Users  $users
+     * @param  \App\Models\User  $users
      * @return \Illuminate\Http\Response
      */
-    public function edit(Users $users)
+    public function edit(User $users)
     {
         //
     }
@@ -82,10 +74,10 @@ class UsersController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Users  $users
+     * @param  \App\Models\User  $users
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Users $users)
+    public function update(Request $request, User $users)
     {
         //
     }
@@ -93,10 +85,10 @@ class UsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Users  $users
+     * @param  \App\Models\User  $users
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Users $users)
+    public function destroy(User $users)
     {
         //
     }

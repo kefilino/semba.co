@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UsersController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,8 @@ use App\Http\Controllers\UsersController;
 |
 */
 
-Route::get('/', [UsersController::class, 'index']);
-Route::get('/about', [UsersController::class, 'about']);
-Route::get('/login', [UsersController::class, 'login']);
-Route::post('/login', [UsersController::class, 'login']);
-Route::view('/register', 'landingpage.register');
-Route::post('/register', [UsersController::class, 'register']);
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/about', [HomeController::class, 'about']);
+Route::get('/register', [HomeController::class, 'register']);
+Route::post('/register', [UserController::class, 'create']);
+Route::get('/home', [UserController::class, 'index']);

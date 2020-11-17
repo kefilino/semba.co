@@ -43,7 +43,7 @@
                     <h2>Login</h2>
                     <div class="underline-title"></div>
                 </div>
-                <form method="post" class="form">
+                <form action="{{ route('login') }}" method="post" class="form">
                 @csrf
                     <label for="user-email" style="padding-top:13px">
                         &nbsp;E-mail :
