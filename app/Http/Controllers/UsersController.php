@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateNewAccount;
+use App\Http\Requests\UserSignupRequest;
 use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,21 +30,9 @@ class UsersController extends Controller
         return view('landingpage.login');
     }
 
-    public function register(Request $request) {
-        if ($request->has('email')) {
-            $request->validate([
-                'nama' => 'required|min:3|max:50',
-                'email' => 'required|email|unique:users,email',
-                'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
-                'password_confirmation' => 'min:6',
-                'nik' => 'size:16|required',
-                'kk' => 'size:16|required',
-                'alamat' => 'min:6|required',
-                'kode_pos' => 'size:5|required'
-            ]);
-            dd($request->all());
-        }
-        return view('landingpage.register');
+    public function register(UserSignupRequest $request) {
+        Users::create($request->validated());
+        return view('landingpage.login');
     }
 
     /**
