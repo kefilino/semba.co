@@ -11,11 +11,17 @@ use Illuminate\Support\Facades\Redis;
 
 class UserController extends Controller
 {
-    public function index()
+    public function dashboard()
     {
-        if(Auth::check()) {
-            echo 'login berhasil';
+        if (Auth::check()) {
+            return view('user.dashboard');
         }
+        return redirect('/');
+    }
+
+    public function logout() {
+        Auth::logout();
+        return redirect('/');
     }
 
     /**

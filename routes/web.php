@@ -19,4 +19,5 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/about', [HomeController::class, 'about']);
 Route::get('/register', [HomeController::class, 'register']);
 Route::post('/register', [UserController::class, 'create']);
-Route::get('/home', [UserController::class, 'index']);
+Route::get('/logout', [UserController::class, 'logout']);
+Route::get('/dashboard', [UserController::class, 'dashboard']);

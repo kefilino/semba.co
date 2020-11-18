@@ -11,7 +11,11 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('landingpage.home');
+        if (Auth::check()) {
+            return redirect('/dashboard');
+        } else {
+            return view('landingpage.home');
+        }
     }
 
     public function about() {
