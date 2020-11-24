@@ -41,7 +41,7 @@ label {
 }
 #card-logo {
     position: relative;
-    align: left;
+    justify-content: center;
     height: 100%;
 }
 #card-title {

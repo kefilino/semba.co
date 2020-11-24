@@ -14,9 +14,9 @@
 
         <nav class="navbar navbar-toggleable-md navbar-expand-lg fixed-top ">
             <a class="navbar-brand " href="#">Semba.co</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">  
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
                 <ul class="navbar-nav ">
@@ -47,7 +47,7 @@
     <footer class="page-footer ">
         <div class="container-fluid text-center ">
             <p class="">Aplikasi ini dibawah naungan :</p>
-            <img src="kemensos.png" class="img-fluid " alt="Responsive image">
+            <img src="{{ asset('images/kemensos.png') }}" class="img-fluid " alt="Responsive image">
         </div>
 
     </footer>
