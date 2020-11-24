@@ -14,11 +14,11 @@ class CreatePermintaanTable extends Migration
     public function up()
     {
         Schema::create('permintaan', function (Blueprint $table) {
-            $table->string('id_permintaan')->unique();
+            $table->id();
             $table->string('kk');
             $table->string('id_bantuan');
-            $table->foreign('id_bantuan')->references('id_bantuan')->on('bantuan');
-            $table->boolean('status');
+            // $table->foreign('id_bantuan')->references('id')->on('bantuan');
+            $table->string('status')->default('Sedang diproses.');
             $table->timestamps();
         });
     }

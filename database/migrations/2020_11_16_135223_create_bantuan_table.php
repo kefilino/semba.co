@@ -14,6 +14,7 @@ class CreateBantuanTable extends Migration
     public function up()
     {
         Schema::create('bantuan', function (Blueprint $table) {
+            $table->id();
             $table->string('id_bantuan')->unique();
             $table->string('nama_bantuan');
             $table->string('persediaan');

@@ -1,8 +1,7 @@
 <?php
 
+use App\Http\Controllers\PermintaanController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +14,16 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
-Route::get('/about', [HomeController::class, 'about']);
-Route::get('/register', [HomeController::class, 'register']);
-Route::post('/register', [UserController::class, 'create']);
-Route::get('/logout', [UserController::class, 'logout']);
-Route::get('/dashboard', [UserController::class, 'dashboard']);
+Route::get('/', function () {
+    return view('home');
+})->middleware('guest');
+
+Route::get('/about', function () {
+    return view('about');
+});
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return Inertia\Inertia::render('Dashboard');
+})->name('dashboard');
+
+Route::resource('permintaan', PermintaanController::class);

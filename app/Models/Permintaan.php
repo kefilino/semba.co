@@ -9,16 +9,14 @@ class Permintaan extends Model
 {
     use HasFactory;
 
-    protected $table = 'permintaan';
-
-    protected $casts = [
-        'status' => 'boolean'
-    ];
-
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
-        'id_permintaan',
-        'kk',
-        'id_bantuan',
-        'status'
+        'kk', 'id_bantuan'
     ];
+
+    protected $table = 'permintaan';
 }

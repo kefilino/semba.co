@@ -1,0 +1,19 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.navbar {
+    font-family: "Rockwell";
+}
+
+.jumbotron {
+    background: url(../../public/images/asset/groceries.jpg) center no-repeat fixed;
+    background-size: cover;
+    height: 75vh;
+    width: 100vw;
+    margin: 0;
+}
+
+.text-shadow {
+    text-shadow: 3px 3px #000000d0;
+}
