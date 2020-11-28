@@ -22,8 +22,12 @@ Route::get('/about', function () {
     return view('about');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia\Inertia::render('Dashboard');
-})->name('dashboard');
-
-Route::resource('permintaan', PermintaanController::class);
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/dashboard', function () {
+        return Inertia\Inertia::render('Dashboard');
+    })->name('dashboard');
+    Route::resource('permintaan', PermintaanController::class)->name('index', 'permintaan');
+    Route::get('/pengaturan', function () {
+        return Inertia\Inertia::render('Pengaturan');
+    })->name('pengaturan');
+});

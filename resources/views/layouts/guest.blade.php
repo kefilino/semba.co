@@ -10,7 +10,7 @@
 
 <body class="bg-white text-black font-sans">
     <nav class="navbar bg-white text-blue-600 border-b border-gray-200">
-        <div class="flex items-center justify-between mx-auto px-4 py-2">
+        <div class="flex items-center justify-between mx-auto px-4 py-2 h-15">
             <a class="sm:ml-16 text-xl sm:text-3xl" href="/">Semba.co</a>
             <ul class="flex items-center relative">
                 <li class="sm:mr-4">

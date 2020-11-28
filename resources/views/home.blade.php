@@ -1,4 +1,7 @@
 <x-guest-layout>
+    <x-slot name="title">
+        Server Error
+    </x-slot>
     <div class="container mx-auto my-auto text-center">
         <h3 class="sm:text-2xl text-shadow tracking-widest">Selamat datang di</h3>
         <h1 class="text-5xl sm:text-6xl text-shadow text-yellow-100" style="font-family: 'Rockwell';">Semba.co<hr></h1>
