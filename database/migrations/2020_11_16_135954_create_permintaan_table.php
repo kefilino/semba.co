@@ -15,10 +15,13 @@ class CreatePermintaanTable extends Migration
     {
         Schema::create('permintaan', function (Blueprint $table) {
             $table->id();
-            $table->string('kk');
-            $table->string('id_bantuan');
-            // $table->foreign('id_bantuan')->references('id')->on('bantuan');
-            $table->string('status')->default('Sedang diproses.');
+            $table->unsignedBigInteger('id_peminta');
+            $table->unsignedBigInteger('id_bantuan');
+            $table->foreign('id_peminta')->references('id')->on('users');
+            $table->foreign('id_bantuan')->references('id')->on('bantuan');
+            $table->boolean('status')->nullable();
+            $table->string('pesan');
+            $table->string('keterangan')->default('Sedang diproses.');
             $table->timestamps();
         });
     }

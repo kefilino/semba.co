@@ -1,15 +1,8 @@
 <template>
   <app-layout>
-    <template #header>
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Manage Post - (Laravel 8 Inertia JS CRUD with Jetstream & Tailwind CSS -
-        ItSolutionStuff.com)
-      </h2>
-    </template>
-
     <div class="py-12">
-      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
+      <div class="max-w-full mx-auto sm:px-6 lg:px-8">
+        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
           <div
             class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3"
             role="alert"
@@ -23,6 +16,7 @@
           </div>
 
           <button
+            v-if="!$page.user.is_admin"
             @click="openModal()"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3"
           >
@@ -34,11 +28,11 @@
               <tr class="bg-gray-100">
                 <th class="px-4 py-2 w-20">No.</th>
 
-                <th class="px-4 py-2">Title</th>
+                <th class="px-4 py-2">Jenis Bantuan</th>
 
-                <th class="px-4 py-2">Body</th>
+                <th class="px-4 py-2">Pesan</th>
 
-                <th class="px-4 py-2">Action</th>
+                <th class="px-4 py-2">Status</th>
               </tr>
             </thead>
 
@@ -120,13 +114,13 @@
                         <label
                           for="exampleFormControlInput2"
                           class="block text-gray-700 text-sm font-bold mb-2"
-                          >Status:</label
+                          >Keterangan Permintaan:</label
                         >
 
                         <textarea
                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                           id="exampleFormControlInput2"
-                          v-model="form.status"
+                          v-model="form.pesan"
                           placeholder="Enter Body"
                         ></textarea>
 
@@ -191,9 +185,9 @@
 </template>
 
 <script>
-import AppLayout from "@/Layouts/AppLayout";
+import AppLayout from "./../Layouts/AppLayout";
 
-import Welcome from "@/Jetstream/Welcome";
+import Welcome from "./../Jetstream/Welcome";
 
 export default {
   components: {
@@ -211,11 +205,8 @@ export default {
       isOpen: false,
 
       form: {
-        id_bantuan: null,
-
-        status: null,
-
-        kk: 1,
+        id_peminta: null,
+        pesan: null,
       },
     };
   },
@@ -235,15 +226,13 @@ export default {
 
     reset: function () {
       this.form = {
-        id_bantuan: null,
-
-        status: null,
-
-        kk: 1,
+        id_peminta: null,
+        pesan: null,
       };
     },
 
     save: function (data) {
+        data.id_peminta = this.$page.user.id;
       this.$inertia.post("/permintaan", data);
 
       this.reset();

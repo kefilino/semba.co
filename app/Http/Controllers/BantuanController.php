@@ -2,20 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Permintaan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
-use Inertia\Inertia;
 
-class PermintaanController extends Controller
+class BantuanController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-
-        // $this->middleware('is_admin')->only('admin_dashboard');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -23,12 +13,7 @@ class PermintaanController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->is_admin) {
-            $data = Permintaan::all();
-            return Inertia::render('Permintaan', ['data' => $data]);
-        }
-        $data = Permintaan::where('id_peminta', Auth::user()->id)->get();
-        return Inertia::render('Permintaan', ['data' => $data]);
+        //
     }
 
     /**
@@ -49,15 +34,7 @@ class PermintaanController extends Controller
      */
     public function store(Request $request)
     {
-        Validator::make($request->all(), [
-            'id_bantuan' => ['required'],
-        ])->validate();
-
-        // dd($request);
-        Permintaan::create($request->all());
-
-        return redirect()->back()
-            ->with('message', 'Permintaan berhasil dibuat.');
+        //
     }
 
     /**

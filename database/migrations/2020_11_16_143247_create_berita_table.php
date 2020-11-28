@@ -15,10 +15,10 @@ class CreateBeritaTable extends Migration
     {
         Schema::create('berita', function (Blueprint $table) {
             $table->id();
-            $table->string('id_berita')->unique();
-            $table->string('author');
+            $table->string('penulis');
             $table->string('judul');
             $table->longText('isi');
+            $table->text('foto_path')->nullable();
             $table->timestamps();
         });
     }

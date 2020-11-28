@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Permintaan extends Model
+class Berita extends Model
 {
     use HasFactory;
 
@@ -15,8 +15,8 @@ class Permintaan extends Model
      * @var array
      */
     protected $fillable = [
-        'id_bantuan', 'id_peminta', 'pesan'
+        'penulis', 'judul', 'isi', 'foto_path'
     ];
 
-    protected $table = 'permintaan';
+    protected $table = 'berita';
 }

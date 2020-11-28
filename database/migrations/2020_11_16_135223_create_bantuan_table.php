@@ -15,10 +15,10 @@ class CreateBantuanTable extends Migration
     {
         Schema::create('bantuan', function (Blueprint $table) {
             $table->id();
-            $table->string('id_bantuan')->unique();
             $table->string('nama_bantuan');
-            $table->string('persediaan');
-            $table->string('foto');
+            $table->string('keterangan')->nullable();
+            $table->unsignedSmallInteger('persediaan');
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }
