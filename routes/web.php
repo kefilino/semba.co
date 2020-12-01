@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\BantuanController;
+use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\PermintaanController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,9 +29,7 @@ Route::get('/about', function () {
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('/permintaan', PermintaanController::class)->name('index', 'permintaan');
-    Route::get('/pengaturan', function () {
-        return Inertia\Inertia::render('Pengaturan');
-    })->name('pengaturan');
+    Route::get('/pengaturan', [PengaturanController::class, 'index'])->name('pengaturan');
     Route::resource('/bantuan', BantuanController::class)->name('index', 'bantuan');
     Route::resource('/berita', BeritaController::class)->name('index', 'berita');
 });

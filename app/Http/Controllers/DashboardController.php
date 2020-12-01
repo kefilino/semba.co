@@ -38,4 +38,9 @@ class DashboardController extends Controller
         $data['jml_berita'] = Berita::all()->count();
         return Inertia::render('Admin/Dashboard', ['data' => $data]);
     }
+
+    public function pengaturan()
+    {
+        return Inertia::render('Pengaturan');
+    }
 }
