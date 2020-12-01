@@ -34,6 +34,7 @@ class BantuanController extends Controller
     public function create()
     {
         //
+        return Inertia::render('CreateBantuan');
     }
 
     /**
@@ -45,6 +46,17 @@ class BantuanController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'nama_bantuan' => 'required',
+            'keterangan' => 'required',
+            'persediaan' => 'required',
+            'foto' => 'required'
+        ]);
+
+        Bantuan::create($request->all());
+
+        return redirect()->back()
+            ->with('message', 'Bantuan Berhasil Ditambahkan!');
     }
 
     /**
@@ -56,6 +68,7 @@ class BantuanController extends Controller
     public function show($id)
     {
         //
+        return Inertia::render('Bantuan');
     }
 
     /**
@@ -67,6 +80,7 @@ class BantuanController extends Controller
     public function edit($id)
     {
         //
+        return Inertia::render('EditBantuan');
     }
 
     /**
@@ -79,6 +93,16 @@ class BantuanController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $request->validate([
+            'nama_bantuan' => 'required',
+            'keterangan' => 'required',
+            'persediaan' => 'required',
+            'foto' => 'required'
+        ]);
+        Bantuan::update($request->all());
+
+        return redirect()->back()
+            ->with('message', 'Bantuan Berhasil Diupdate!');
     }
 
     /**
@@ -90,5 +114,9 @@ class BantuanController extends Controller
     public function destroy($id)
     {
         //
+        Bantuan::delete();
+
+        return redirect()->back()
+            ->with('message', 'Bantuan Berhasil Dihapus!');
     }
 }
