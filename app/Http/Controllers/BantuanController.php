@@ -2,10 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bantuan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class BantuanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+
+        $this->middleware('is_admin')->only(['store', 'edit', 'update', 'destroy']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +22,8 @@ class BantuanController extends Controller
      */
     public function index()
     {
-        //
+        $data = Bantuan::all();
+        return Inertia::render('Bantuan', ['data' => $data]);
     }
 
     /**

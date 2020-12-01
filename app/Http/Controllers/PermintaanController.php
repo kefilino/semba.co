@@ -14,7 +14,7 @@ class PermintaanController extends Controller
     {
         $this->middleware('auth');
 
-        // $this->middleware('is_admin')->only('admin_dashboard');
+        $this->middleware('is_admin')->only('');
     }
     /**
      * Display a listing of the resource.
@@ -53,7 +53,6 @@ class PermintaanController extends Controller
             'id_bantuan' => ['required'],
         ])->validate();
 
-        // dd($request);
         Permintaan::create($request->all());
 
         return redirect()->back()

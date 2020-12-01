@@ -16,11 +16,11 @@
           </div>
 
           <button
-            v-if="!$page.user.is_admin"
+            v-if="$page.user.is_admin"
             @click="openModal()"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3"
           >
-            Buat Permintaan Baru
+            Buat Bantuan Baru
           </button>
 
           <table class="table-fixed w-full">
@@ -28,11 +28,15 @@
               <tr class="bg-gray-100">
                 <th class="px-4 py-2 w-20">No.</th>
 
-                <th class="px-4 py-2">Jenis Bantuan</th>
+                <th class="px-4 py-2">Nama Bantuan</th>
 
-                <th class="px-4 py-2">Pesan</th>
+                <th class="px-4 py-2">Keterangan</th>
 
-                <th class="px-4 py-2">Status</th>
+                <th class="px-4 py-2">Persediaan</th>
+
+                <th class="px-4 py-2">Foto</th>
+
+                <th class="px-4 py-2"></th>
               </tr>
             </thead>
 
@@ -40,9 +44,13 @@
               <tr v-for="row in data">
                 <td class="border px-4 py-2">{{ row.id }}</td>
 
-                <td class="border px-4 py-2">{{ row.id_bantuan }}</td>
+                <td class="border px-4 py-2">{{ row.nama_bantuan }}</td>
 
-                <td class="border px-4 py-2">{{ row.status }}</td>
+                <td class="border px-4 py-2">{{ row.keterangan }}</td>
+
+                <td class="border px-4 py-2">{{ row.persediaan }}</td>
+
+                <td class="border px-4 py-2">{{ row.foto }}</td>
 
                 <td class="border px-4 py-2">
                   <button
@@ -94,7 +102,7 @@
                         <label
                           for="exampleFormControlInput1"
                           class="block text-gray-700 text-sm font-bold mb-2"
-                          >ID Bantuan:</label
+                          >Persediaan:</label
                         >
 
                         <input
@@ -102,7 +110,7 @@
                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                           id="exampleFormControlInput1"
                           placeholder="Enter Title"
-                          v-model="form.id_bantuan"
+                          v-model="form.persediaan"
                         />
 
                         <div v-if="$page.errors.title" class="text-red-500">
@@ -114,13 +122,13 @@
                         <label
                           for="exampleFormControlInput2"
                           class="block text-gray-700 text-sm font-bold mb-2"
-                          >Keterangan Permintaan:</label
+                          >Deskripsi Bantuan:</label
                         >
 
                         <textarea
                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                           id="exampleFormControlInput2"
-                          v-model="form.pesan"
+                          v-model="form.keterangan"
                           placeholder="Enter Body"
                         ></textarea>
 
@@ -205,8 +213,8 @@ export default {
       isOpen: false,
 
       form: {
-        id_peminta: null,
-        pesan: null,
+        keterangan: null,
+        persediaan: null,
       },
     };
   },
@@ -226,14 +234,13 @@ export default {
 
     reset: function () {
       this.form = {
-        id_peminta: null,
-        pesan: null,
+        keterangan: null,
+        persediaan: null,
       };
     },
 
     save: function (data) {
-      data.id_peminta = this.$page.user.id;
-      this.$inertia.post("/permintaan", data);
+      this.$inertia.post("/bantuan", data);
 
       this.reset();
 
@@ -253,7 +260,7 @@ export default {
     update: function (data) {
       data._method = "PUT";
 
-      this.$inertia.post("/permintaan/" + data.id, data);
+      this.$inertia.post("/bantuan/" + data.id, data);
 
       this.reset();
 
@@ -265,7 +272,7 @@ export default {
 
       data._method = "DELETE";
 
-      this.$inertia.post("/permintaan/" + data.id, data);
+      this.$inertia.post("/bantuan/" + data.id, data);
 
       this.reset();
 

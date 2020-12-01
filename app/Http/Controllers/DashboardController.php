@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bantuan;
+use App\Models\Berita;
+use App\Models\Permintaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -30,6 +33,9 @@ class DashboardController extends Controller
 
     public function admin_dashboard()
     {
-        return Inertia::render('Admin/Dashboard');
+        $data['jml_permintaan'] = Permintaan::all()->count();
+        $data['jml_bantuan'] = Bantuan::all()->count();
+        $data['jml_berita'] = Berita::all()->count();
+        return Inertia::render('Admin/Dashboard', ['data' => $data]);
     }
 }
