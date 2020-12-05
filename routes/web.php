@@ -26,14 +26,14 @@ Route::get('/about', function () {
     return view('about');
 });
 
+Route::middleware(['auth:sanctum', 'verified', 'is_admin'])->group(function () {
+    Route::put('/permintaan/accept/{id}', [PermintaanController::class, 'approve'])->name('permintaan.approve');
+    Route::put ('/permintaan/reject/{id}', [PermintaanController::class, 'disapprove'])->name('permintaan.disapprove');
+});
+
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('/permintaan', PermintaanController::class)->name('index', 'permintaan');
-    Route::get('/pengaturan', [PengaturanController::class, 'index'])->name('pengaturan');
     Route::resource('/bantuan', BantuanController::class)->name('index', 'bantuan');
     Route::resource('/berita', BeritaController::class)->name('index', 'berita');
-});
-
-Route::middleware(['auth:sanctum', 'verified', 'is_admin'])->group(function () {
-    //
 });

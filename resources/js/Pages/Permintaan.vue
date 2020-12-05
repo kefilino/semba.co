@@ -26,38 +26,73 @@
           <table class="table-fixed w-full">
             <thead>
               <tr class="bg-gray-100">
-                <th class="px-4 py-2 w-20">No.</th>
+                <th class="px-4 py-2 w-20">ID</th>
 
-                <th class="px-4 py-2">Jenis Bantuan</th>
+                <th class="px-4 py-2">Bantuan</th>
 
                 <th class="px-4 py-2">Pesan</th>
 
-                <th class="px-4 py-2">Status</th>
+                <th v-if="$page.user.is_admin" class="px-4 py-2">Nama Peminta</th>
+
+                <th v-if="$page.user.is_admin" class="px-4 py-2">KK Peminta</th>
+
+                <th v-if="!$page.user.is_admin" class="px-4 py-2">Status</th>
+
+                <th class="px-4 py-2">Aksi</th>
               </tr>
             </thead>
 
             <tbody>
               <tr v-for="row in data">
-                <td class="border px-4 py-2">{{ row.id }}</td>
+                <td class="border px-4 py-2 text-center">{{ row.id }}</td>
 
-                <td class="border px-4 py-2">{{ row.id_bantuan }}</td>
+                <td class="border px-4 py-2">{{ row.nama_bantuan }}</td>
 
-                <td class="border px-4 py-2">{{ row.status }}</td>
+                <td class="border px-4 py-2">{{ row.pesan }}</td>
 
-                <td class="border px-4 py-2">
-                  <button
+                <td v-if="$page.user.is_admin" class="border px-4 py-2">{{ row.name }}</td>
+
+                <td v-if="$page.user.is_admin" class="border px-4 py-2">{{ row.kk }}</td>
+
+                <td v-if="!$page.user.is_admin" class="border px-4 py-2">
+                  <label for="status" v-if="row.status === 1">Diterima</label>
+                  <label for="status" v-if="row.status === 0">Ditolak</label>
+                  <label for="status" v-if="row.status === null">Diproses</label>
+                </td>
+
+                <td class="flex flex-wrap border px-4 py-2 sm:space-x-1 justify-center">
+                  <button v-if="$page.user.is_admin && row.status === null"
+                    @click="approve(row)"
+                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                  >
+                    Terima
+                  </button>
+                  <button v-if="$page.user.is_admin && row.status === null"
+                    @click="disapprove(row)"
+                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                  >
+                    Tolak
+                  </button>
+                  <label for="status" v-if="$page.user.is_admin && row.status === 1">
+                    Permintaan Diterima
+                  </label>
+                  <label for="status" v-if="$page.user.is_admin && row.status === 0">
+                    Permintaan Ditolak
+                  </label>
+
+                  <button v-if="!$page.user.is_admin && row.status === null"
                     @click="edit(row)"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    class="bg-green-500 hover:bg-green-700 text-white font-bold px-4 rounded"
                   >
                     Edit
                   </button>
-
-                  <button
+                  <button v-if="!$page.user.is_admin && row.status === null"
                     @click="deleteRow(row)"
-                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                    class="bg-red-500 hover:bg-red-700 text-white font-bold px-4 rounded"
                   >
                     Delete
                   </button>
+                  <label for="status" v-if="!$page.user.is_admin && row.status !== null">Tidak Tersedia.</label>
                 </td>
               </tr>
             </tbody>
@@ -208,6 +243,8 @@ export default {
         id_peminta: null,
         pesan: null,
       },
+      
+      count: 0,
     };
   },
 
@@ -242,8 +279,28 @@ export default {
       this.editMode = false;
     },
 
+    approve: function (data) {
+      data._method = "PUT";
+
+      this.$inertia.put("/permintaan/accept/" + data.id);
+
+      this.reset();
+
+      this.closeModal();
+    },
+
+    disapprove: function (data) {
+      data._method = "PUT";
+
+      this.$inertia.put("/permintaan/reject/" + data.id);
+
+      this.reset();
+
+      this.closeModal();
+    },
+
     edit: function (data) {
-      this.form = Object.assign({}, data);
+      this.form = Object.assign({}, data, data);
 
       this.editMode = true;
 
@@ -261,7 +318,7 @@ export default {
     },
 
     deleteRow: function (data) {
-      if (!confirm("Are you sure want to remove?")) return;
+      if (!confirm("Apakah anda yakin ingin menghapus permintaan?")) return;
 
       data._method = "DELETE";
 

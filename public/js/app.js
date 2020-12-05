@@ -4089,6 +4089,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4104,7 +4139,8 @@ __webpack_require__.r(__webpack_exports__);
       form: {
         id_peminta: null,
         pesan: null
-      }
+      },
+      count: 0
     };
   },
   methods: {
@@ -4129,8 +4165,20 @@ __webpack_require__.r(__webpack_exports__);
       this.closeModal();
       this.editMode = false;
     },
+    approve: function approve(data) {
+      data._method = "PUT";
+      this.$inertia.put("/permintaan/accept/" + data.id);
+      this.reset();
+      this.closeModal();
+    },
+    disapprove: function disapprove(data) {
+      data._method = "PUT";
+      this.$inertia.put("/permintaan/reject/" + data.id);
+      this.reset();
+      this.closeModal();
+    },
     edit: function edit(data) {
-      this.form = Object.assign({}, data);
+      this.form = Object.assign({}, data, data);
       this.editMode = true;
       this.openModal();
     },
@@ -4141,7 +4189,7 @@ __webpack_require__.r(__webpack_exports__);
       this.closeModal();
     },
     deleteRow: function deleteRow(data) {
-      if (!confirm("Are you sure want to remove?")) return;
+      if (!confirm("Apakah anda yakin ingin menghapus permintaan?")) return;
       data._method = "DELETE";
       this.$inertia.post("/permintaan/" + data.id, data);
       this.reset();
@@ -47810,8 +47858,8 @@ var render = function() {
                     "jet-nav-link",
                     {
                       attrs: {
-                        href: _vm.route("pengaturan"),
-                        active: _vm.route().current("pengaturan")
+                        href: _vm.route("profile.show"),
+                        active: _vm.route().current("profile.show")
                       }
                     },
                     [
@@ -48626,16 +48674,23 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "container bg-gray-400 sm:rounded-lg w-1/3 h-48 text-center"
+                          "container bg-green-400 sm:rounded-lg w-1/2 md:w-1/3 h-32 md:h-48 text-center"
                       },
                       [
-                        _c("article", {}, [
-                          _vm._v(_vm._s(_vm.data.jml_permintaan))
-                        ]),
+                        _c(
+                          "article",
+                          { staticClass: "text-3xl mt-2 sm:text-6xl sm:mt-6" },
+                          [_vm._v(_vm._s(_vm.data.jml_permintaan))]
+                        ),
                         _vm._v(" "),
-                        _c("label", { attrs: { for: "jml_permintaan" } }, [
-                          _vm._v("Jumlah Permintaan")
-                        ])
+                        _c(
+                          "label",
+                          {
+                            staticClass: "text-xl sm:text-2xl",
+                            attrs: { for: "jml_permintaan" }
+                          },
+                          [_vm._v("Jumlah Permintaan")]
+                        )
                       ]
                     ),
                     _vm._v(" "),
@@ -48643,16 +48698,23 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "container bg-blue-400 sm:rounded-lg w-1/3 h-48 text-center"
+                          "container bg-yellow-400 sm:rounded-lg w-1/2 md:w-1/3 h-32 md:h-48 text-center"
                       },
                       [
-                        _c("article", {}, [
-                          _vm._v(_vm._s(_vm.data.jml_bantuan))
-                        ]),
+                        _c(
+                          "article",
+                          { staticClass: "text-3xl mt-2 sm:text-6xl sm:mt-6" },
+                          [_vm._v(_vm._s(_vm.data.jml_bantuan))]
+                        ),
                         _vm._v(" "),
-                        _c("label", { attrs: { for: "jml_permintaan" } }, [
-                          _vm._v("Jenis Sembako")
-                        ])
+                        _c(
+                          "label",
+                          {
+                            staticClass: "text-xl sm:text-2xl",
+                            attrs: { for: "jml_permintaan" }
+                          },
+                          [_vm._v("Jenis Sembako")]
+                        )
                       ]
                     )
                   ]
@@ -48666,16 +48728,23 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "container bg-blue-400 sm:rounded-lg w-1/3 h-48 text-center"
+                          "container bg-purple-400 sm:rounded-lg w-1/3 md:w-1/3 h-32 md:h-48  text-center"
                       },
                       [
-                        _c("article", {}, [
-                          _vm._v(_vm._s(_vm.data.jml_berita))
-                        ]),
+                        _c(
+                          "article",
+                          { staticClass: "text-3xl mt-2 sm:text-6xl sm:mt-6" },
+                          [_vm._v(_vm._s(_vm.data.jml_berita))]
+                        ),
                         _vm._v(" "),
-                        _c("label", { attrs: { for: "jml_permintaan" } }, [
-                          _vm._v("Jenis Berita")
-                        ])
+                        _c(
+                          "label",
+                          {
+                            staticClass: "text-xl sm:text-2xl",
+                            attrs: { for: "jml_permintaan" }
+                          },
+                          [_vm._v("Jenis Berita")]
+                        )
                       ]
                     )
                   ]
@@ -49382,15 +49451,29 @@ var render = function() {
             _c("table", { staticClass: "table-fixed w-full" }, [
               _c("thead", [
                 _c("tr", { staticClass: "bg-gray-100" }, [
-                  _c("th", { staticClass: "px-4 py-2 w-20" }, [_vm._v("No.")]),
+                  _c("th", { staticClass: "px-4 py-2 w-20" }, [_vm._v("ID")]),
                   _vm._v(" "),
-                  _c("th", { staticClass: "px-4 py-2" }, [
-                    _vm._v("Jenis Bantuan")
-                  ]),
+                  _c("th", { staticClass: "px-4 py-2" }, [_vm._v("Bantuan")]),
                   _vm._v(" "),
                   _c("th", { staticClass: "px-4 py-2" }, [_vm._v("Pesan")]),
                   _vm._v(" "),
-                  _c("th", { staticClass: "px-4 py-2" }, [_vm._v("Status")])
+                  _vm.$page.user.is_admin
+                    ? _c("th", { staticClass: "px-4 py-2" }, [
+                        _vm._v("Nama Peminta")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.$page.user.is_admin
+                    ? _c("th", { staticClass: "px-4 py-2" }, [
+                        _vm._v("KK Peminta")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  !_vm.$page.user.is_admin
+                    ? _c("th", { staticClass: "px-4 py-2" }, [_vm._v("Status")])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("th", { staticClass: "px-4 py-2" }, [_vm._v("Aksi")])
                 ])
               ]),
               _vm._v(" "),
@@ -49398,47 +49481,162 @@ var render = function() {
                 "tbody",
                 _vm._l(_vm.data, function(row) {
                   return _c("tr", [
-                    _c("td", { staticClass: "border px-4 py-2" }, [
+                    _c("td", { staticClass: "border px-4 py-2 text-center" }, [
                       _vm._v(_vm._s(row.id))
                     ]),
                     _vm._v(" "),
                     _c("td", { staticClass: "border px-4 py-2" }, [
-                      _vm._v(_vm._s(row.id_bantuan))
+                      _vm._v(_vm._s(row.nama_bantuan))
                     ]),
                     _vm._v(" "),
                     _c("td", { staticClass: "border px-4 py-2" }, [
-                      _vm._v(_vm._s(row.status))
+                      _vm._v(_vm._s(row.pesan))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "border px-4 py-2" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass:
-                            "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
-                          on: {
-                            click: function($event) {
-                              return _vm.edit(row)
-                            }
-                          }
-                        },
-                        [_vm._v("\n                  Edit\n                ")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass:
-                            "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded",
-                          on: {
-                            click: function($event) {
-                              return _vm.deleteRow(row)
-                            }
-                          }
-                        },
-                        [_vm._v("\n                  Delete\n                ")]
-                      )
-                    ])
+                    _vm.$page.user.is_admin
+                      ? _c("td", { staticClass: "border px-4 py-2" }, [
+                          _vm._v(_vm._s(row.name))
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.$page.user.is_admin
+                      ? _c("td", { staticClass: "border px-4 py-2" }, [
+                          _vm._v(_vm._s(row.kk))
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    !_vm.$page.user.is_admin
+                      ? _c("td", { staticClass: "border px-4 py-2" }, [
+                          row.status === 1
+                            ? _c("label", { attrs: { for: "status" } }, [
+                                _vm._v("Diterima")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          row.status === 0
+                            ? _c("label", { attrs: { for: "status" } }, [
+                                _vm._v("Ditolak")
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          row.status === null
+                            ? _c("label", { attrs: { for: "status" } }, [
+                                _vm._v("Diproses")
+                              ])
+                            : _vm._e()
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      {
+                        staticClass:
+                          "flex flex-wrap border px-4 py-2 sm:space-x-1 justify-center"
+                      },
+                      [
+                        _vm.$page.user.is_admin && row.status === null
+                          ? _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.approve(row)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                  Terima\n                "
+                                )
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.$page.user.is_admin && row.status === null
+                          ? _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.disapprove(row)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                  Tolak\n                "
+                                )
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.$page.user.is_admin && row.status === 1
+                          ? _c("label", { attrs: { for: "status" } }, [
+                              _vm._v(
+                                "\n                  Permintaan Diterima\n                "
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.$page.user.is_admin && row.status === 0
+                          ? _c("label", { attrs: { for: "status" } }, [
+                              _vm._v(
+                                "\n                  Permintaan Ditolak\n                "
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        !_vm.$page.user.is_admin && row.status === null
+                          ? _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "bg-green-500 hover:bg-green-700 text-white font-bold px-4 rounded",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.edit(row)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                  Edit\n                "
+                                )
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        !_vm.$page.user.is_admin && row.status === null
+                          ? _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "bg-red-500 hover:bg-red-700 text-white font-bold px-4 rounded",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.deleteRow(row)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                  Delete\n                "
+                                )
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        !_vm.$page.user.is_admin && row.status !== null
+                          ? _c("label", { attrs: { for: "status" } }, [
+                              _vm._v("Tidak Tersedia.")
+                            ])
+                          : _vm._e()
+                      ]
+                    )
                   ])
                 }),
                 0

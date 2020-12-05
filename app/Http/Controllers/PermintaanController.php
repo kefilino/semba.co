@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Permintaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
@@ -24,10 +25,23 @@ class PermintaanController extends Controller
     public function index()
     {
         if (Auth::user()->is_admin) {
-            $data = Permintaan::all();
+            $data = DB::table('permintaan')->join('bantuan', 'permintaan.id_bantuan', '=', 'bantuan.id')
+                    ->join('users', 'permintaan.id_peminta', '=', 'users.id')->get(
+                        array('permintaan.id', 'nama_bantuan', 'pesan', 'status', 'name', 'kk') 
+                    );
             return Inertia::render('Permintaan', ['data' => $data]);
         }
-        $data = Permintaan::where('id_peminta', Auth::user()->id)->get();
+        $data = DB::table('permintaan')->join('bantuan', 'permintaan.id_bantuan', '=', 'bantuan.id')
+                ->join('users', 'permintaan.id_peminta', '=', 'users.id')
+                ->where('id_peminta', Auth::user()->id)
+                ->get(array(
+                    'permintaan.id',
+                    'nama_bantuan',
+                    'pesan',
+                    'status',
+                    'name',
+                    'kk'
+                ));
         return Inertia::render('Permintaan', ['data' => $data]);
     }
 
@@ -99,8 +113,27 @@ class PermintaanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        if ($request->has('id')) {
+            Permintaan::find($request->input('id'))->delete();
+            return redirect()->back();
+        }
+    }
+
+    public function approve($id)
+    {
+        if (!is_null($id)) {
+            Permintaan::where('id', $id)->update(['status' => true]);
+            return redirect()->back();
+        }
+    }
+
+    public function disapprove($id)
+    {
+        if (!is_null($id)) {
+            Permintaan::where('id', $id)->update(['status' => false]);
+            return redirect()->back();
+        }
     }
 }
