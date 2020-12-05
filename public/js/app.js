@@ -3724,6 +3724,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3737,6 +3757,7 @@ __webpack_require__.r(__webpack_exports__);
       editMode: false,
       isOpen: false,
       form: {
+        nama_bantuan: null,
         keterangan: null,
         persediaan: null
       }
@@ -3753,6 +3774,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     reset: function reset() {
       this.form = {
+        nama_bantuan: null,
         keterangan: null,
         persediaan: null
       };
@@ -48811,7 +48833,7 @@ var render = function() {
                   "button",
                   {
                     staticClass:
-                      "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3",
+                      "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3 ml-3",
                     on: {
                       click: function($event) {
                         return _vm.openModal()
@@ -48841,7 +48863,9 @@ var render = function() {
                   _vm._v(" "),
                   _c("th", { staticClass: "px-4 py-2" }, [_vm._v("Foto")]),
                   _vm._v(" "),
-                  _c("th", { staticClass: "px-4 py-2" })
+                  _vm.$page.user.is_admin
+                    ? _c("th", { staticClass: "px-4 py-2" })
+                    : _vm._e()
                 ])
               ]),
               _vm._v(" "),
@@ -48849,7 +48873,7 @@ var render = function() {
                 "tbody",
                 _vm._l(_vm.data, function(row) {
                   return _c("tr", [
-                    _c("td", { staticClass: "border px-4 py-2" }, [
+                    _c("td", { staticClass: "border px-4 py-2 text-center" }, [
                       _vm._v(_vm._s(row.id))
                     ]),
                     _vm._v(" "),
@@ -48869,35 +48893,45 @@ var render = function() {
                       _vm._v(_vm._s(row.foto))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "border px-4 py-2" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass:
-                            "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
-                          on: {
-                            click: function($event) {
-                              return _vm.edit(row)
-                            }
-                          }
-                        },
-                        [_vm._v("\n                  Edit\n                ")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass:
-                            "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded",
-                          on: {
-                            click: function($event) {
-                              return _vm.deleteRow(row)
-                            }
-                          }
-                        },
-                        [_vm._v("\n                  Delete\n                ")]
-                      )
-                    ])
+                    _vm.$page.user.is_admin
+                      ? _c("td", { staticClass: "border px-4 py-2" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
+                              on: {
+                                click: function($event) {
+                                  return _vm.edit(row)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                  Edit\n                "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded",
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteRow(row)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                  Delete\n                "
+                              )
+                            ]
+                          )
+                        ])
+                      : _vm._e()
                   ])
                 }),
                 0
@@ -48966,6 +49000,69 @@ var render = function() {
                                             for: "exampleFormControlInput1"
                                           }
                                         },
+                                        [_vm._v("Nama Bantuan:")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.nama_bantuan,
+                                            expression: "form.nama_bantuan"
+                                          }
+                                        ],
+                                        staticClass:
+                                          "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                        attrs: {
+                                          type: "text",
+                                          id: "exampleFormControlInput1",
+                                          placeholder: "Masukkan Nama Bantuan"
+                                        },
+                                        domProps: {
+                                          value: _vm.form.nama_bantuan
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "nama_bantuan",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _vm.$page.errors.title
+                                        ? _c(
+                                            "div",
+                                            { staticClass: "text-red-500" },
+                                            [
+                                              _vm._v(
+                                                "\n                        " +
+                                                  _vm._s(
+                                                    _vm.$page.errors.title[0]
+                                                  ) +
+                                                  "\n                      "
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e()
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "mb-4" }, [
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "block text-gray-700 text-sm font-bold mb-2",
+                                          attrs: {
+                                            for: "exampleFormControlInput2"
+                                          }
+                                        },
                                         [_vm._v("Persediaan:")]
                                       ),
                                       _vm._v(" "),
@@ -48982,8 +49079,9 @@ var render = function() {
                                           "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
                                         attrs: {
                                           type: "text",
-                                          id: "exampleFormControlInput1",
-                                          placeholder: "Enter Title"
+                                          id: "exampleFormControlInput2",
+                                          placeholder:
+                                            "Masukkan Banyak Persediaan"
                                         },
                                         domProps: {
                                           value: _vm.form.persediaan
@@ -49026,7 +49124,7 @@ var render = function() {
                                           staticClass:
                                             "block text-gray-700 text-sm font-bold mb-2",
                                           attrs: {
-                                            for: "exampleFormControlInput2"
+                                            for: "exampleFormControlInput3"
                                           }
                                         },
                                         [_vm._v("Deskripsi Bantuan:")]
@@ -49044,8 +49142,9 @@ var render = function() {
                                         staticClass:
                                           "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
                                         attrs: {
-                                          id: "exampleFormControlInput2",
-                                          placeholder: "Enter Body"
+                                          id: "exampleFormControlInput3",
+                                          placeholder:
+                                            "Masukkan Keterangan dari Bantuan"
                                         },
                                         domProps: {
                                           value: _vm.form.keterangan
@@ -49437,7 +49536,7 @@ var render = function() {
                   "button",
                   {
                     staticClass:
-                      "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3",
+                      "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3 ml-3",
                     on: {
                       click: function($event) {
                         return _vm.openModal()
@@ -49722,7 +49821,7 @@ var render = function() {
                                         attrs: {
                                           type: "text",
                                           id: "exampleFormControlInput1",
-                                          placeholder: "Enter Title"
+                                          placeholder: "Masukkan ID Bantuan"
                                         },
                                         domProps: {
                                           value: _vm.form.id_bantuan
@@ -49784,7 +49883,8 @@ var render = function() {
                                           "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
                                         attrs: {
                                           id: "exampleFormControlInput2",
-                                          placeholder: "Enter Body"
+                                          placeholder:
+                                            "Masukkan Pesan Pengajuan Permintaan"
                                         },
                                         domProps: { value: _vm.form.pesan },
                                         on: {

@@ -18,7 +18,7 @@
           <button
             v-if="!$page.user.is_admin"
             @click="openModal()"
-            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3 ml-3"
           >
             Buat Permintaan Baru
           </button>
@@ -136,7 +136,7 @@
                           type="text"
                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                           id="exampleFormControlInput1"
-                          placeholder="Enter Title"
+                          placeholder="Masukkan ID Bantuan"
                           v-model="form.id_bantuan"
                         />
 
@@ -156,7 +156,7 @@
                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                           id="exampleFormControlInput2"
                           v-model="form.pesan"
-                          placeholder="Enter Body"
+                          placeholder="Masukkan Pesan Pengajuan Permintaan"
                         ></textarea>
 
                         <div v-if="$page.errors.body" class="text-red-500">

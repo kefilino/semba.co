@@ -18,7 +18,7 @@
           <button
             v-if="$page.user.is_admin"
             @click="openModal()"
-            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3 ml-3"
           >
             Buat Bantuan Baru
           </button>
@@ -36,13 +36,13 @@
 
                 <th class="px-4 py-2">Foto</th>
 
-                <th class="px-4 py-2"></th>
+                <th class="px-4 py-2" v-if="$page.user.is_admin"></th>
               </tr>
             </thead>
 
             <tbody>
               <tr v-for="row in data">
-                <td class="border px-4 py-2">{{ row.id }}</td>
+                <td class="border px-4 py-2 text-center">{{ row.id }}</td>
 
                 <td class="border px-4 py-2">{{ row.nama_bantuan }}</td>
 
@@ -52,7 +52,7 @@
 
                 <td class="border px-4 py-2">{{ row.foto }}</td>
 
-                <td class="border px-4 py-2">
+                <td class="border px-4 py-2" v-if="$page.user.is_admin">
                   <button
                     @click="edit(row)"
                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -102,15 +102,15 @@
                         <label
                           for="exampleFormControlInput1"
                           class="block text-gray-700 text-sm font-bold mb-2"
-                          >Persediaan:</label
+                          >Nama Bantuan:</label
                         >
 
                         <input
                           type="text"
                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                           id="exampleFormControlInput1"
-                          placeholder="Enter Title"
-                          v-model="form.persediaan"
+                          placeholder="Masukkan Nama Bantuan"
+                          v-model="form.nama_bantuan"
                         />
 
                         <div v-if="$page.errors.title" class="text-red-500">
@@ -122,14 +122,34 @@
                         <label
                           for="exampleFormControlInput2"
                           class="block text-gray-700 text-sm font-bold mb-2"
+                          >Persediaan:</label
+                        >
+
+                        <input
+                          type="text"
+                          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                          id="exampleFormControlInput2"
+                          placeholder="Masukkan Banyak Persediaan"
+                          v-model="form.persediaan"
+                        />
+
+                        <div v-if="$page.errors.title" class="text-red-500">
+                          {{ $page.errors.title[0] }}
+                        </div>
+                      </div>
+
+                      <div class="mb-4">
+                        <label
+                          for="exampleFormControlInput3"
+                          class="block text-gray-700 text-sm font-bold mb-2"
                           >Deskripsi Bantuan:</label
                         >
 
                         <textarea
                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                          id="exampleFormControlInput2"
+                          id="exampleFormControlInput3"
                           v-model="form.keterangan"
-                          placeholder="Enter Body"
+                          placeholder="Masukkan Keterangan dari Bantuan"
                         ></textarea>
 
                         <div v-if="$page.errors.body" class="text-red-500">
@@ -213,6 +233,7 @@ export default {
       isOpen: false,
 
       form: {
+        nama_bantuan: null,
         keterangan: null,
         persediaan: null,
       },
@@ -234,6 +255,7 @@ export default {
 
     reset: function () {
       this.form = {
+        nama_bantuan: null,
         keterangan: null,
         persediaan: null,
       };

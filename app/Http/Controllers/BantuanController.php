@@ -50,7 +50,6 @@ class BantuanController extends Controller
             'nama_bantuan' => 'required',
             'keterangan' => 'required',
             'persediaan' => 'required',
-            'foto' => 'required'
         ]);
 
         Bantuan::create($request->all());
@@ -68,7 +67,6 @@ class BantuanController extends Controller
     public function show($id)
     {
         //
-        return Inertia::render('Bantuan');
     }
 
     /**
@@ -77,10 +75,9 @@ class BantuanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
         //
-        return Inertia::render('EditBantuan');
     }
 
     /**
@@ -92,17 +89,10 @@ class BantuanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        $request->validate([
-            'nama_bantuan' => 'required',
-            'keterangan' => 'required',
-            'persediaan' => 'required',
-            'foto' => 'required'
-        ]);
-        Bantuan::update($request->all());
-
-        return redirect()->back()
-            ->with('message', 'Bantuan Berhasil Diupdate!');
+        if ($request->has('id')) {
+            Bantuan::find($request->input('id'))->update($request->all());
+            return redirect()->back();
+        }
     }
 
     /**
@@ -111,12 +101,12 @@ class BantuanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
-        Bantuan::delete();
-
-        return redirect()->back()
-            ->with('message', 'Bantuan Berhasil Dihapus!');
+        if ($request->has('id')) {
+            Bantuan::find($request->input('id'))->delete();
+            return redirect()->back()
+                ->with('message', 'Bantuan Berhasil Dihapus!');
+        }
     }
 }
